@@ -166,23 +166,29 @@
           <p class="section-text">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit ducimus magnam asperiores hic aspernatur possimus iste consequuntur, cum autem repudiandae! Corporis iure, magni, laudantium odit fugit dolore libero et laboriosam?
           </p>
-         
 
+          <?php
+          include "database.php";
+          $sql = "SELECT * FROM packages";
+          $result = mysqli_query($conn, $sql);
+          if(mysqli_num_rows($result) > 0){
+            while($row = mysqli_fetch_array($result)){
+          ?>
           <ul class="package-list">
 
             <li>
               <div class="package-card">
 
                 <figure class="card-banner">
-                  <img src="./assets/images/packege-1.jpg" alt="Experience The Great Holiday On Beach" loading="lazy">
+                  <img src="<?php echo !empty($row['image']) ? 'data:image;base64,' . base64_encode($row['image']) : './assets/images/packege-1.jpg'; ?>"  loading="lazy">
                 </figure>
 
                 <div class="card-content">
 
-                  <h3 class="h3 card-title">Experience The Great Holiday On Beach</h3>
+                  <h3 class="h3 card-title"><?php echo $row['packagename']?></h3>
 
                   <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum voluptas vero sequi odio velit mollitia consectetur culpa repellat unde suscipit voluptates, ipsam vitae quidem molestiae, facilis, dolore eos nulla autem.
+                    <?php echo $row['description']?>
                   </p>
 
                   <ul class="card-meta-list">
@@ -199,7 +205,7 @@
                       <div class="meta-box">
                         <ion-icon name="people"></ion-icon>
 
-                        <p class="text">pax: 10</p>
+                        <p class="text">Max: <?php echo $row['numPerson']?></p>
                       </div>
                     </li>
 
@@ -207,7 +213,7 @@
                       <div class="meta-box">
                         <ion-icon name="location"></ion-icon>
 
-                        <p class="text">Malaysia</p>
+                        <p class="text"><?php echo $row['destination']?></p>
                       </div>
                     </li>
 
@@ -232,157 +238,11 @@
                   </div>
 
                   <p class="price">
-                    $750
+                  $<?php echo $row['price']?>
                     <span>/ per person</span>
                   </p>
 
-                  <button class="btn btn-secondary">Book Now</button>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="package-card">
-
-                <figure class="card-banner">
-                  <img src="./assets/images/packege-2.jpg" alt="Summer Holiday To The Oxolotan River" loading="lazy">
-                </figure>
-
-                <div class="card-content">
-
-                  <h3 class="h3 card-title">Summer Holiday To The Oxolotan River</h3>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore atque consequuntur, laborum ipsam vero dicta quis magnam illum fugit nobis, facere cumque commodi animi quia dolor ullam. Praesentium, totam, quasi?
-                  </p>
-
-                  <ul class="card-meta-list">
-
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="time"></ion-icon>
-
-                        <p class="text">7D/6N</p>
-                      </div>
-                    </li>
-
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="people"></ion-icon>
-
-                        <p class="text">pax: 10</p>
-                      </div>
-                    </li>
-
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="location"></ion-icon>
-
-                        <p class="text">Malaysia</p>
-                      </div>
-                    </li>
-
-                  </ul>
-
-                </div>
-
-                <div class="card-price">
-
-                  <div class="wrapper">
-
-                    <p class="reviews">(20 reviews)</p>
-
-                    <div class="card-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                    </div>
-
-                  </div>
-
-                  <p class="price">
-                    $520
-                    <span>/ per person</span>
-                  </p>
-
-                  <button class="btn btn-secondary">Book Now</button>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="package-card">
-
-                <figure class="card-banner">
-                  <img src="./assets/images/packege-3.jpg" alt="Santorini Island's Weekend Vacation" loading="lazy">
-                </figure>
-
-                <div class="card-content">
-
-                  <h3 class="h3 card-title">Santorini Island's Weekend Vacation</h3>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet inventore nihil quos aperiam, eius maiores fuga, enim iste sapiente odit, alias voluptatibus. Deserunt vero sunt blanditiis nemo. Laborum, incidunt, iste.
-                  </p>
-
-                  <ul class="card-meta-list">
-
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="time"></ion-icon>
-
-                        <p class="text">7D/6N</p>
-                      </div>
-                    </li>
-
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="people"></ion-icon>
-
-                        <p class="text">pax: 10</p>
-                      </div>
-                    </li>
-
-                    <li class="card-meta-item">
-                      <div class="meta-box">
-                        <ion-icon name="location"></ion-icon>
-
-                        <p class="text">Malaysia</p>
-                      </div>
-                    </li>
-
-                  </ul>
-
-                </div>
-
-                <div class="card-price">
-
-                  <div class="wrapper">
-
-                    <p class="reviews">(40 reviews)</p>
-
-                    <div class="card-rating">
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                      <ion-icon name="star"></ion-icon>
-                    </div>
-
-                  </div>
-
-                  <p class="price">
-                    $660
-                    <span>/ per person</span>
-                  </p>
-
-                  <button class="btn btn-secondary">Book Now</button>
+                  <a href="bookPackage/login.php?id=<?php echo $row['packageId']?>"><button class="btn btn-secondary">Book Now</button></a>
 
                 </div>
 
@@ -390,9 +250,14 @@
             </li>
 
           </ul>
-
+          <?php
+            }
+          }else{
+            echo '<h2 class="h2 section-title">Packages are unavailable at the moment</h2>';
+          }
+          ?>
           <button class="btn btn-primary">View All Packages</button>
-
+         
         </div>
       </section>
 
