@@ -35,7 +35,7 @@
             
         </ul>
         <div class="buttons">
-            <a href="inscription.php" class="action-button pro">Book now</a>
+            <a href="packages.php" class="action-button pro">Book now</a>
             <a href="declaration.php" class="action-button">Learn more</a>
         </div>
 
@@ -105,7 +105,7 @@
           $sql = "INSERT INTO contacte (name, email, phone, message) VALUES ('$name', '$email', '$phone', '$message')";
         
           if ($conn->query($sql) === TRUE) {
-              echo "Votre message a été bien envoiyer on va vous contactera par email ou par numeros telephone merci !!";
+              echo "<p style='color: green;'>Votre message a été bien envoiyer on va vous contactera par email ou par numeros telephone merci !!</p>";
           } else {
               echo "Erreur lors de l'enregistrement du message : " . $conn->error;
           }
