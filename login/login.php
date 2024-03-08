@@ -59,7 +59,7 @@
                             <a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Google</a>
                             <a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a>
                         </div>
-                            <p class="w-100 text-center">Don't have an account? <a href="signup.php">SIGN UP!</a></p>
+                            <p class="w-100 text-center">Don't have an account? <a href="../signup/signup.php">SIGN UP!</a></p>
                     </div>
                 </div>
             </div>
