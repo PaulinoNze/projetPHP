@@ -31,7 +31,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 $_SESSION['userId'] = $row['userId'];
                 $user = $row['userId'];
                 if($email === 'admin@gmail.com' && $password === 'admin'){
-                    header("Location: admin.php");
+                    header("Location: ../Admine.php");
                     exit();
                 }else{
                     header("Location: ../bookPackage/reservation/profile.php");
