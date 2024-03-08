@@ -28,10 +28,11 @@
           <button class="nav-open-btn" aria-label="Open Menu" data-nav-open-btn>
             <ion-icon name="menu-outline"></ion-icon>
           </button>
-
+          <a href="login/login.php" class="btn btn-primary">Sign In</a>
         </div>
 
       </div>
+      
     </div>
 
     <div class="header-bottom">

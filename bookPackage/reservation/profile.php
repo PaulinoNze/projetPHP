@@ -1,9 +1,13 @@
 <?php
+session_start();
+if(isset($_SESSION['userId']) || isset($_GET['id'])){
 include "../../database.php";
-if(isset($_GET['note'])){
+if(isset($_GET['note']) && isset($_GET['res'])){
     $note = $_GET['note'];
     $userId = $_GET['id'];
-    $sql = "UPDATE reservation SET paid= $note WHERE userId = $userId";
+    $reservationId = $_GET['res'];
+    $reservationId = $_GET['res'];
+    $sql = "UPDATE reservation SET paid= $note WHERE reservationId = $reservationId";
     mysqli_query($conn, $sql);
 }
 ?>
@@ -702,8 +706,8 @@ if(isset($_GET['note'])){
                                 <div class="profile-header-info">
                                 <?php
                                 include "../../database.php";
-                                if (isset($_GET['id'])) {
-                                    $userId = $_GET['id'];
+                                if (isset($_SESSION['userId'])) {
+                                    $userId = $_SESSION['userId'];
                                     $sql = "SELECT firstname, lastname FROM users WHERE userId = $userId";
                                     $result = mysqli_query($conn, $sql);
                                     if (mysqli_num_rows($result) > 0) {
@@ -711,7 +715,7 @@ if(isset($_GET['note'])){
                                     }
                                     }
                                 ?>
-                                    <h4 class="m-t-10 m-b-5"><?php echo $row['firstname']." ". $row['lastname']; ?></h4>
+                                    <h4 class="m-t-10 m-b-5">Hey there <?php echo $row['firstname']." ". $row['lastname']; ?>👋!, below are your active reservations</h4>
                                     
                                 </div>
                                 
@@ -733,7 +737,7 @@ if(isset($_GET['note'])){
                                 <ul class="timeline">
                                 <?php
                                 include "../../database.php";
-                                    $userId = $_GET['id'];
+                                    $userId = $_SESSION['userId'];
                                     $sql = "SELECT r.reservationId, r.checkInDate, r.rooms, r.numAdult, r.numChildren,r.price AS reservationPrice, r.paid, p.packagename, p.description, p.packagename, p.destination, u.firstname,
                                     u.lastname FROM reservation r JOIN users u ON r.userId = u.userId JOIN packages p ON r.packageId = p.packageId WHERE u.userId = $userId";
                                     $result = mysqli_query($conn, $sql);
@@ -767,12 +771,12 @@ if(isset($_GET['note'])){
                                                     <span class="stats-text">Destination: <?php echo $row['destination']; ?></span>
                                                     <span class="stats-text">Status: 
                                                         <?php
-                                                        $paid = intval($row['paid']);
-                                                        if($paid != 1){
-                                                            echo "$".$row['reservationPrice']."to be paid at reception";
-                                                        }else{
+                                                        if($row['paid'] != 0){
                                                             echo "Paid";
+                                                        }else{
+                                                            echo "$".$row['reservationPrice']." to be paid at reception";
                                                         }
+                                                        
                                                         ?>
                                                     </span>
                                                 </div>
@@ -810,3 +814,11 @@ if(isset($_GET['note'])){
 </body>
 
 </html>
+<?php
+}else{
+    header("Location: ../../index.php");
+    exit();
+}
+
+
+?>

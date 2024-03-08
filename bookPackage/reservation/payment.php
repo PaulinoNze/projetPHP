@@ -103,7 +103,7 @@
             include "../../database.php";
             if (isset($_GET['reservation'])) {
                 $reservationId = $_GET['reservation'];
-                $sql = "SELECT r.destination, r.checkInDate, r.checkOutDate, r.numAdult, r.numChildren, r.rooms, r.price, u.email, u.userId FROM reservation r JOIN users u ON r.userId = u.userId WHERE r.reservationId = $reservationId";
+                $sql = "SELECT r.reservationId, r.destination, r.checkInDate, r.checkOutDate, r.numAdult, r.numChildren, r.rooms, r.price, u.email, u.userId FROM reservation r JOIN users u ON r.userId = u.userId WHERE r.reservationId = $reservationId";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     $row = mysqli_fetch_array($result);
@@ -205,9 +205,9 @@
                                     <span>$<?php echo $row['price']; ?></span>
                                 </div>
                             </div>
-                                <a href="profile.php?note=1&id=<?php echo $row['userId']?>" class="btn btn-primary " style="width: auto; margin-left: 100px; margin-right: 100px;">Pay Now</a>
+                                <a href="profile.php?note=1&id=<?php echo $row['userId']?>&res=<?php echo $row['reservationId'];?>" class="btn btn-primary " style="width: auto; margin-left: 100px; margin-right: 100px;">Pay Now</a>
                                 <br>
-                                <a href="profile.php?note=0&id=<?php echo $row['userId']?>" class="btn btn-primary " style="width: auto; margin-left: 100px; margin-right: 100px;">Pay At Reception</a>
+                                <a href="profile.php?note=0&id=<?php echo $row['userId']?>&res=<?php echo $row['reservationId'];?>" class="btn btn-primary " style="width: auto; margin-left: 100px; margin-right: 100px;">Pay At Reception</a>
                             </div>
                         </div>
                     </div>
