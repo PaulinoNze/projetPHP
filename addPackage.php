@@ -706,25 +706,25 @@ if (isset($_SESSION['userId']) || isset($_GET['id'])) {
                                             }
                                         }
                                         ?>
-                                        <h4 class="m-t-10 m-b-5">Welcome back <?php echo $row['firstname']; ?>👋!</h4>
+                                        <h4 class="m-t-10 m-b-5">Welcome back <?php echo $row['firstname']; ?>👋!, below are your active reservations</h4>
 
                                     </div>
-                                    
+
 
                                 </div>
                                 <div>
-                            <ul class="profile-header-tab nav nav-tabs">
-                                <li class="nav-item"><a href="Admine.php" style="text-decoration: underline; color: black;">Reservations</a></li>
-                                <li class="nav-item"><a href="messages.php" >Message</a></li>
-                                <li class="nav-item"><a href="viewPackage.php">View All Packages</a></li>
-                                <li class="nav-item"><a href="addPackage.php" >Add Package</a></li>
-                            </ul>
-                            </div>
+                                    <ul class="profile-header-tab nav nav-tabs">
+                                        <li class="nav-item"><a href="Admine.php" >Reservations</a></li>
+                                        <li class="nav-item"><a href="messages.php">Message</a></li>
+                                        <li class="nav-item"><a href="viewPackage.php">View All Packages</a></li>
+                                        <li class="nav-item"><a href="addPackage.php" style="text-decoration: underline; color: black;">Add Package</a></li>
+                                    </ul>
+                                </div>
 
                             </div>
-                            
 
-                            
+
+
                         </div>
 
 
@@ -732,94 +732,63 @@ if (isset($_SESSION['userId']) || isset($_GET['id'])) {
                 </div>
 
 
-                <div class="profile-content">
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <img class="mb-4" src="logo1.jpg" alt="" width="300" style="border-radius: 20px; margin-left: 170px;">
+                            <h2 class="mb-4" style="text-align: center;">Add Package</h2>
+                            <form action="packageAuth.php" method="POST" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="nombre">package Name:</label>
+                                        <input type="text" class="form-control" placeholder="Package Name" name="packagename" require>
+                                    </div>
+                                    <div class="col">
+                                        <label for="nombre">Destination:</label>
+                                        <input type="text" class="form-control" placeholder="Destination" name="destination" require>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="nombre">Price:</label>
+                                        <input type="text" class="form-control" placeholder="Price" name="price"  required>
+                                    </div>
+                                    </script>
+                                    <div class="col">
+                                        <label for="nombre">Max Number of People:</label>
+                                        <input type="number" class="form-control" min="1" name="numPerson" require>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col">
+                                    <label for="nombre">Description:</label><br>
+                                        <textarea name="description" cols="70" rows="10"></textarea>
+                                    </div>
+                                </div>
 
-                    <div class="tab-content p-0">
+                                <div class="row">
+                                    <div class="col">
+                                        <label>Image</label>
+                                        <input type="file" name="image" class="form-control" required>
+                                    </div>
 
-                        <div class="tab-pane fade active show" id="profile-post">
-
-                            <ul class="timeline">
-                                <?php
-                                include "database.php";
-                                $sql = "SELECT r.reservationId, r.checkInDate, r.checkOutDate, r.rooms, r.numAdult, r.numChildren,r.price AS reservationPrice, r.paid, r.userId, p.packagename, p.description, p.packagename, p.destination, u.firstname,
-                                    u.lastname, u.email FROM reservation r JOIN users u ON r.userId = u.userId JOIN packages p ON r.packageId = p.packageId";
-                                $result = mysqli_query($conn, $sql);
-                                if (mysqli_num_rows($result) > 0) {
-                                    while ($row = mysqli_fetch_array($result)) {
-                                ?>
-                                        <li>
-
-                                            <div class="timeline-time">
-                                                <span class="date">Check In Date</span>
-                                                <span class="time"><?php echo $row['checkInDate']; ?></span>
-                                            </div>
+                                </div><br>
+                                <button type="submit" class="btn btn-primary" name="submit" id="submitButton">Enregistrement</button>
 
 
-                                            <div class="timeline-icon">
-                                                <a href="javascript:;">&nbsp;</a>
-                                            </div>
-
-
-                                            <div class="timeline-body" style="width: 700px;">
-                                                <div class="timeline-header">
-                                                    <span class="username"><a href="javascript:;"><?php echo $row['packagename']; ?></a> <small></small></span>
-                                                </div>
-                                                <div class="timeline-content">
-                                                    <p>
-                                                        Reserved by: <?php echo $row['firstname']." ". $row['lastname']; ?><br>
-                                                        Rooms: <?php echo $row['rooms']; ?><br>
-                                                        Number of Adults: <?php echo $row['numAdult']; ?><br>
-                                                        Number of Children: <?php echo $row['numChildren']; ?><br>
-                                                        Reservation email: <?php echo $row['email']; ?><br>
-                                                        Check out date: <?php echo $row['checkOutDate']; ?>
-                                                    </p>
-                                                </div>
-                                                <div class="timeline-likes">
-                                                    <div class="stats-right">
-                                                        <span class="stats-text">Destination: <?php echo $row['destination']; ?></span>
-                                                        <span class="stats-text">Status:
-                                                            <?php
-                                                            if ($row['paid'] != 0) {
-                                                                echo "Paid";
-                                                            } else {
-                                                                echo "$" . $row['reservationPrice'] . " to be paid at reception";
-                                                            }
-
-                                                            ?>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="timeline-footer">
-                                                    <a href="cancelReservation.php?Rid=<?php echo $row['reservationId']; ?>&id=<?php echo $row['userId']; ?>" class="btn btn-danger">Cancel Reservation</a>
-                                                </div>
-                                            </div>
-
-                                        </li>
-                                <?php
-                                    }
-                                } else {
-                                    echo "<h3 align='center'> You have no reservations.</h3>";
-                                }
-                                ?>
-                            </ul>
-
+                            </form>
 
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-        </div>
-        </div>
-        </div>
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
-        <script type="text/javascript">
+            <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
+            <script type="text/javascript">
 
-        </script>
+            </script>
     </body>
 
     </html>

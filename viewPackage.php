@@ -706,7 +706,7 @@ if (isset($_SESSION['userId']) || isset($_GET['id'])) {
                                             }
                                         }
                                         ?>
-                                        <h4 class="m-t-10 m-b-5">Welcome back <?php echo $row['firstname']; ?>👋!</h4>
+                                        <h4 class="m-t-10 m-b-5">Welcome back <?php echo $row['firstname']; ?>👋!, below are your active reservations</h4>
 
                                     </div>
                                     
@@ -714,9 +714,9 @@ if (isset($_SESSION['userId']) || isset($_GET['id'])) {
                                 </div>
                                 <div>
                             <ul class="profile-header-tab nav nav-tabs">
-                                <li class="nav-item"><a href="Admine.php" style="text-decoration: underline; color: black;">Reservations</a></li>
+                                <li class="nav-item"><a href="Admine.php" >Reservations</a></li>
                                 <li class="nav-item"><a href="messages.php" >Message</a></li>
-                                <li class="nav-item"><a href="viewPackage.php">View All Packages</a></li>
+                                <li class="nav-item"><a href="viewPackage.php" style="text-decoration: underline; color: black;">View All Packages</a></li>
                                 <li class="nav-item"><a href="addPackage.php" >Add Package</a></li>
                             </ul>
                             </div>
@@ -741,18 +741,14 @@ if (isset($_SESSION['userId']) || isset($_GET['id'])) {
                             <ul class="timeline">
                                 <?php
                                 include "database.php";
-                                $sql = "SELECT r.reservationId, r.checkInDate, r.checkOutDate, r.rooms, r.numAdult, r.numChildren,r.price AS reservationPrice, r.paid, r.userId, p.packagename, p.description, p.packagename, p.destination, u.firstname,
-                                    u.lastname, u.email FROM reservation r JOIN users u ON r.userId = u.userId JOIN packages p ON r.packageId = p.packageId";
+                                $userId = $_SESSION['userId'];
+                                $sql = "SELECT * FROM packages";
                                 $result = mysqli_query($conn, $sql);
                                 if (mysqli_num_rows($result) > 0) {
                                     while ($row = mysqli_fetch_array($result)) {
                                 ?>
                                         <li>
 
-                                            <div class="timeline-time">
-                                                <span class="date">Check In Date</span>
-                                                <span class="time"><?php echo $row['checkInDate']; ?></span>
-                                            </div>
 
 
                                             <div class="timeline-icon">
@@ -762,36 +758,24 @@ if (isset($_SESSION['userId']) || isset($_GET['id'])) {
 
                                             <div class="timeline-body" style="width: 700px;">
                                                 <div class="timeline-header">
+                                                <span class="userimage"><img src="<?php echo 'data:image;base64,' . base64_encode($row['image']); ?>" ></span>
                                                     <span class="username"><a href="javascript:;"><?php echo $row['packagename']; ?></a> <small></small></span>
                                                 </div>
                                                 <div class="timeline-content">
                                                     <p>
-                                                        Reserved by: <?php echo $row['firstname']." ". $row['lastname']; ?><br>
-                                                        Rooms: <?php echo $row['rooms']; ?><br>
-                                                        Number of Adults: <?php echo $row['numAdult']; ?><br>
-                                                        Number of Children: <?php echo $row['numChildren']; ?><br>
-                                                        Reservation email: <?php echo $row['email']; ?><br>
-                                                        Check out date: <?php echo $row['checkOutDate']; ?>
+                                                        <?php echo $row['description'];?>
                                                     </p>
                                                 </div>
                                                 <div class="timeline-likes">
                                                     <div class="stats-right">
                                                         <span class="stats-text">Destination: <?php echo $row['destination']; ?></span>
-                                                        <span class="stats-text">Status:
-                                                            <?php
-                                                            if ($row['paid'] != 0) {
-                                                                echo "Paid";
-                                                            } else {
-                                                                echo "$" . $row['reservationPrice'] . " to be paid at reception";
-                                                            }
-
-                                                            ?>
-                                                        </span>
+                                                        <span class="stats-text">Price : <?php echo $row['price'];?></span>
+                                                        <span class="stats-text">Maximum Number of people: <?php echo $row['numPerson'];?></span>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="timeline-footer">
-                                                    <a href="cancelReservation.php?Rid=<?php echo $row['reservationId']; ?>&id=<?php echo $row['userId']; ?>" class="btn btn-danger">Cancel Reservation</a>
+                                                    <a href="deletePackage.php?id=<?php echo $row['packageId']; ?>" class="btn btn-danger">Delete package</a>
                                                 </div>
                                             </div>
 
@@ -799,7 +783,7 @@ if (isset($_SESSION['userId']) || isset($_GET['id'])) {
                                 <?php
                                     }
                                 } else {
-                                    echo "<h3 align='center'> You have no reservations.</h3>";
+                                    echo "<h3 align='center'> You have no packages.</h3>";
                                 }
                                 ?>
                             </ul>
