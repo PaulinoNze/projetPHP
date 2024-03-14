@@ -1,5 +1,9 @@
 
+<?php
+session_start();
+if(isset($_SESSION['userId']) && isset($_SESSION['firstname'])){
 
+?>
 
 
 <!DOCTYPE html>
@@ -31,7 +35,7 @@
 
         <ul class="links">
             <li><a href="index.php">Home</a></li>
-            <li><a href="login/login.php">Sign in</a></li>
+            <li><a href="logout.php"> Log Out</a></li>
             
         </ul>
         <div class="buttons">
@@ -207,3 +211,8 @@
 
   </body>
 </html>
+<?php
+}else{
+  header("Location: ../home.php");
+}
+?>

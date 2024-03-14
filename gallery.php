@@ -1,3 +1,8 @@
+<?php
+session_start();
+if(isset($_SESSION['userId']) && isset($_SESSION['firstname'])){
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,19 +45,14 @@
     <div class="header-top">
       <div class="container">
 
-        <a href="tel:+01123456790" class="helpline-box">
+  
 
-          <div class="icon-box">
-            <ion-icon name="call-outline"></ion-icon>
-          </div>
+         <div class="icon-box">
+            </div>
+     
 
-          <div class="wrapper">
-            <p class="helpline-title">For Further Inquires :</p>
-
-            <p class="helpline-number">+212 642 866 131</p>
-          </div>
-
-        </a>
+    
+      
 
         <a href="#" class="logo">
           <img src="./assets/images/logo.svg" alt="Tourly logo">
@@ -68,6 +68,7 @@
 
       </div>
     </div>
+
 
     <div class="header-bottom">
       <div class="container">
@@ -136,8 +137,7 @@
 
         </nav>
 
-        <button class="btn btn-primary">Book Now</button>
-
+        <a href="logout.php" class="navbar-link text-decoration-none" data-nav-link onmouseover="this.style.color='black';" onmouseout="this.style.color='';"> Log Out</a>
       </div>
     </div>
 
@@ -163,41 +163,76 @@
           <h2 class="h2 section-title">Photo's From Travellers</h2>
 
           <p class="section-text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero beatae, est eum impedit pariatur reiciendis tenetur. Magni porro assumenda corrupti, iure blanditiis, soluta ad autem corporis ipsam et voluptatibus ipsum!
+           
           </p>
 
           <ul class="gallery-list">
 
             <li class="gallery-item">
               <figure class="gallery-image">
-                <img src="./assets/images/gallery-1.jpg" alt="Gallery image">
+                <img src="../page/img1/dakhla-attitude-locations-581cc335.jpeg" alt="Gallery image">
               </figure>
             </li>
 
             <li class="gallery-item">
               <figure class="gallery-image">
-                <img src="./assets/images/gallery-2.jpg" alt="Gallery image">
+                <img src="../page/img1/Dakhla_DSVoyages_0002_Sahara-Desert-Bivouac-Erg-Chebbi-Dunes-Merzouga3.jpg" alt="Gallery image">
               </figure>
             </li>
 
             <li class="gallery-item">
               <figure class="gallery-image">
-                <img src="./assets/images/gallery-3.jpg" alt="Gallery image">
+                <img src="../page/img1/descarga.jpeg" alt="Gallery image">
               </figure>
             </li>
 
             <li class="gallery-item">
               <figure class="gallery-image">
-                <img src="./assets/images/gallery-4.jpg" alt="Gallery image">
+                <img src="../page/img1/dragon-island-dakhla-4-319ed724.jpeg" alt="Gallery image">
               </figure>
             </li>
 
             <li class="gallery-item">
               <figure class="gallery-image">
-                <img src="./assets/images/gallery-5.jpg" alt="Gallery image">
+                <img src="../page/img1/fishing-3-45bbb66a.jpeg" alt="Gallery image">
+              </figure>
+            </li>
+            
+            <li class="gallery-item">
+              <figure class="gallery-image">
+                <img src="../page/img1/FOUMBOUIR-min.jpg" alt="Gallery image">
               </figure>
             </li>
 
+            <li class="gallery-item">
+              <figure class="gallery-image">
+                <img src="../page/img1/Les-Dunes-De-Dakhla-Exterior.jpeg" alt="Gallery image">
+              </figure>
+            </li>
+
+            <li class="gallery-item">
+              <figure class="gallery-image">
+                <img src="../page/img1/morocco-explorer-42.jpg" alt="Gallery image">
+              </figure>
+            </li>
+
+            <li class="gallery-item">
+              <figure class="gallery-image">
+                <img src="../page/img1/ocean-vagabond-main-1024x667.jpg" alt="Gallery image">
+              </figure>
+            </li>
+
+            <li class="gallery-item">
+              <figure class="gallery-image">
+                <img src="../page/img1/people-bonfire-sahara.webp" alt="Gallery image">
+              </figure>
+            </li>
+
+            <li class="gallery-item">
+              <figure class="gallery-image">
+                <img src="../page/img1/pescador-restaurant-dakhla-3-e1d028c3.jpeg" alt="Gallery image">
+              </figure>
+            </li>
           </ul>
 
         </div>
@@ -253,3 +288,8 @@
 </body>
 
 </html>
+<?php
+}else{
+  header("Location: ../home.php");
+}
+?>

@@ -706,10 +706,10 @@ if (isset($_SESSION['userId']) || isset($_GET['id'])) {
                                             }
                                         }
                                         ?>
-                                        <h4 class="m-t-10 m-b-5">Welcome back <?php echo $row['firstname']; ?>👋!, below are your active reservations</h4>
+                                        <h4 class="m-t-10 m-b-5">Welcome back <?php echo $row['firstname']; ?>👋!</h4>
 
                                     </div>
-
+                                    <a href="logout.php" class="stats-right text-white" > Log Out</a>
 
                                 </div>
                                 <div>

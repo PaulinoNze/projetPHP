@@ -1,38 +1,33 @@
+
 <header class="header" data-header>
 
     <div class="overlay" data-overlay></div>
 
     <div class="header-top">
       <div class="container">
-
-        <a href="tel:+01123456790" class="helpline-box">
-
-          <div class="icon-box">
-            <ion-icon name="call-outline"></ion-icon>
-          </div>
-
-          <div class="wrapper">
-            <p class="helpline-title">For Further Inquires :</p>
-
-            <p class="helpline-number">+212 642 866 131</p>
-          </div>
-
-        </a>
+            <div class="wrapper">
+            
+                <p class="helpline-title" ><a href="bookPackage/reservation/profile.php" style="text-decoration: none; color: white;"> 
+                <div class="icon-box">
+              
+              <ion-icon name="person-circle-outline"></ion-icon>
+          </div></a>
+                <p class="helpline-number"><a href="bookPackage/reservation/profile.php" style="text-decoration: none; color: white;" class="helpline-number"><?php echo $_SESSION['firstname']; ?></a></p>
+            </div>
 
         <a href="#" class="logo">
           <img src="./assets/images/logo.svg" alt="Tourly logo">
-        </a>
+
 
         <div class="header-btn-group">
 
           <button class="nav-open-btn" aria-label="Open Menu" data-nav-open-btn>
             <ion-icon name="menu-outline"></ion-icon>
           </button>
-          <a href="login/login.php" class="btn btn-primary">Sign In</a>
+
         </div>
 
       </div>
-      
     </div>
 
     <div class="header-bottom">
@@ -100,7 +95,7 @@
 
         </nav>
 
-        <button class="btn btn-primary">Book Now</button>
+      <a href="logout.php" class="btn btn-primary"> Log Out</a>
 
       </div>
     </div>

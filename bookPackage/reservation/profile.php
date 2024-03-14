@@ -718,7 +718,7 @@ if(isset($_GET['note']) && isset($_GET['res'])){
                                     <h4 class="m-t-10 m-b-5">Hey there <?php echo $row['firstname']." ". $row['lastname']; ?>👋!, below are your active reservations</h4>
                                     
                                 </div>
-                                
+                                <a href="logout.php" class="stats-right text-white" > Log Out</a>
                             </div>
 
 

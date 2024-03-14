@@ -29,12 +29,13 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             if(password_verify($password, $row['password'])){
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['userId'] = $row['userId'];
+                $_SESSION['firstname'] = $row['firstname'];
                 $user = $row['userId'];
                 if($email === 'admin@gmail.com' && $password === 'admin'){
                     header("Location: ../Admine.php");
                     exit();
                 }else{
-                    header("Location: ../bookPackage/reservation/profile.php");
+                    header("Location: ../index.php");
                     exit();
                 }
             }else {

@@ -710,7 +710,7 @@ if (isset($_SESSION['userId']) || isset($_GET['id'])) {
 
                                     </div>
                                     
-
+                                    <a href="logout.php" class="stats-right text-white" > Log Out</a>
                                 </div>
                                 <div>
                             <ul class="profile-header-tab nav nav-tabs">

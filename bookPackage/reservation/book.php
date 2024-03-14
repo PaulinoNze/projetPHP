@@ -1,3 +1,8 @@
+<?php
+session_start();
+if(isset($_SESSION['userId']) && isset($_SESSION['firstname'])){
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,7 +86,7 @@
 								</div>
 								<div class="form-btn">
 									<input type="hidden" name="packageId" value="<?php echo $_GET['id']; ?>">
-									<input type="hidden" name="userId" value="<?php echo $_GET['user']; ?>">
+									<input type="hidden" name="userId" value="<?php echo $_SESSION['userId']; ?>">
 									<button type="submit" class="submit-btn" name="submit">Book</button>
 								</div>
 							</form>
@@ -97,3 +102,8 @@
 </body>
 
 </html>
+<?php
+}else{
+  header("Location: ../home.php");
+}
+?>

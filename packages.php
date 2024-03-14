@@ -1,3 +1,8 @@
+<?php
+session_start();
+if(isset($_SESSION['userId']) && isset($_SESSION['firstname'])){
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,14 +47,10 @@
 
         <a href="tel:+01123456790" class="helpline-box">
 
-          <div class="icon-box">
-            <ion-icon name="call-outline"></ion-icon>
-          </div>
+        
 
           <div class="wrapper">
-            <p class="helpline-title">For Further Inquires :</p>
 
-            <p class="helpline-number">+212 642 866 131</p>
           </div>
 
         </a>
@@ -135,8 +136,7 @@
           </ul>
 
         </nav>
-
-        <button class="btn btn-primary">Book Now</button>
+        <a href="logout.php" class="navbar-link text-decoration-none" data-nav-link onmouseover="this.style.color='black';" onmouseout="this.style.color='';"> Log Out</a>
 
       </div>
     </div>
@@ -164,7 +164,6 @@
           <h2 class="h2 section-title">Checkout Our Packeges</h2>
 
           <p class="section-text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit ducimus magnam asperiores hic aspernatur possimus iste consequuntur, cum autem repudiandae! Corporis iure, magni, laudantium odit fugit dolore libero et laboriosam?
           </p>
 
           <?php
@@ -242,7 +241,7 @@
                     <span>/ per person</span>
                   </p>
 
-                  <a href="bookPackage/login.php?id=<?php echo $row['packageId']?>"><button class="btn btn-secondary">Book Now</button></a>
+                  <a href="bookPackage/reservation/book.php?id=<?php echo $row['packageId']?>"><button class="btn btn-secondary">Book Now</button></a>
 
                 </div>
 
@@ -256,8 +255,6 @@
             echo '<h2 class="h2 section-title">Packages are unavailable at the moment</h2>';
           }
           ?>
-          <button class="btn btn-primary">View All Packages</button>
-         
         </div>
       </section>
 
@@ -311,3 +308,8 @@
 </body>
 
 </html>
+<?php
+}else{
+  header("Location: ../home.php");
+}
+?>

@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(isset($_SESSION['userId']) && isset($_SESSION['firstname'])){
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,19 +47,9 @@
     <div class="header-top">
       <div class="container">
 
-        <a href="tel:+01123456790" class="helpline-box">
+        <div class="helpline-box">
 
-          <div class="icon-box">
-            <ion-icon name="call-outline"></ion-icon>
-          </div>
-
-          <div class="wrapper">
-            <p class="helpline-title">For Further Inquires :</p>
-
-            <p class="helpline-number">+212 642 866 131</p>
-          </div>
-
-        </a>
+        </div>
 
         <a href="#" class="logo">
           <img src="./assets/images/logo.svg" alt="Tourly logo">
@@ -69,6 +65,7 @@
 
       </div>
     </div>
+
 
     <div class="header-bottom">
       <div class="container">
@@ -136,64 +133,24 @@
           </ul>
 
         </nav>
-
-        <button class="btn btn-primary">Book Now</button>
+        <a href="logout.php" class="navbar-link text-decoration-none" data-nav-link onmouseover="this.style.color='black';" onmouseout="this.style.color='';"> Log Out</a>
 
       </div>
     </div>
 
   </header>
 
+<br><br>
+<br>
+<br>
 
-<br><br><br><br>
+
+
+
   <main>
     <article>
 
 
-
-
-
-
-      <!-- 
-        - #TOUR SEARCH
-      -->
-
-      <section class="tour-search">
-        <div class="container">
-
-          <form action="" class="tour-search-form">
-
-            <div class="input-wrapper">
-              <label for="destination" class="input-label">Search Destination*</label>
-
-              <input type="text" name="destination" id="destination" required placeholder="Enter Destination"
-                class="input-field">
-            </div>
-
-            <div class="input-wrapper">
-              <label for="people" class="input-label">Pax Number*</label>
-
-              <input type="number" name="people" id="people" required placeholder="No.of People" class="input-field">
-            </div>
-
-            <div class="input-wrapper">
-              <label for="checkin" class="input-label">Checkin Date**</label>
-
-              <input type="date" name="checkin" id="checkin" required class="input-field">
-            </div>
-
-            <div class="input-wrapper">
-              <label for="checkout" class="input-label">Checkout Date*</label>
-
-              <input type="date" name="checkout" id="checkout" required class="input-field">
-            </div>
-
-            <button type="submit" class="btn btn-secondary">Inquire now</button>
-
-          </form>
-
-        </div>
-      </section>
 
 
 
@@ -206,21 +163,29 @@
       <section class="popular" id="destination">
         <div class="container">
 
-          <p class="section-subtitle">Uncover place</p>
+     
 
           <h2 class="h2 section-title">Popular destination</h2>
 
           <p class="section-text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat quae et magni consequatur explicabo quaerat eos fugit sed optio temporibus excepturi numquam, eum itaque sint, tenetur officia, incidunt. Facere, laborum.
+            
           </p>
 
+        
+
           <ul class="popular-list">
-
+          <?php
+          include "database.php";
+          $sql = "SELECT * FROM packages";
+          $result = mysqli_query($conn, $sql);
+          if(mysqli_num_rows($result) > 0){
+            while($row = mysqli_fetch_array($result)){
+          ?>
             <li>
               <div class="popular-card">
 
                 <figure class="card-img">
-                  <img src="./assets/images/popular-1.jpg" alt="San miguel, italy" loading="lazy">
+                <img src="<?php echo !empty($row['image']) ? 'data:image;base64,' . base64_encode($row['image']) : './assets/images/packege-1.jpg'; ?>"  loading="lazy">
                 </figure>
 
                 <div class="card-content">
@@ -234,93 +199,32 @@
                   </div>
 
                   <p class="card-subtitle">
-                    <a href="#">Italy</a>
+                    <a href="Destination/dest1.php?id=<?php echo $row['packageId'];?>" class="text-decoration-none"><?php echo $row['destination'];?></a>
                   </p>
 
                   <h3 class="h3 card-title">
-                    <a href="#">San miguel</a>
+                    <a href="Destination/dest1.php?id=<?php echo $row['packageId'];?>" class="text-decoration-none"><?php echo $row['packagename'];?></a>
                   </h3>
 
                   <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                  <?php echo $row['description']?>
                   </p>
 
                 </div>
 
               </div>
             </li>
-
-            <li>
-              <div class="popular-card">
-
-                <figure class="card-img">
-                  <img src="./assets/images/popular-2.jpg" alt="Burj khalifa, dubai" loading="lazy">
-                </figure>
-
-                <div class="card-content">
-
-                  <div class="card-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                  </div>
-
-                  <p class="card-subtitle">
-                    <a href="#">Dubai</a>
-                  </p>
-
-                  <h3 class="h3 card-title">
-                    <a href="#">Burj khalifa</a>
-                  </h3>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                  </p>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="popular-card">
-
-                <figure class="card-img">
-                  <img src="./assets/images/popular-3.jpg" alt="Kyoto temple, japan" loading="lazy">
-                </figure>
-
-                <div class="card-content">
-
-                  <div class="card-rating">
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                  </div>
-
-                  <p class="card-subtitle">
-                    <a href="#">Japan</a>
-                  </p>
-
-                  <h3 class="h3 card-title">
-                    <a href="#">Kyoto temple</a>
-                  </h3>
-
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                  </p>
-
-                </div>
-
-              </div>
-            </li>
+            
+            <?php
+            }
+          }else{
+            echo '<h2 class="h2 section-title" style="margin-left: 500px;">Packages are unavailable at the moment</h2>';
+          }
+          ?>     
+           
 
           </ul>
 
-          <button class="btn btn-primary">More destintion</button>
 
         </div>
       </section>
@@ -371,3 +275,9 @@
 </body>
 
 </html>
+<?php
+}else{
+  header("Location: ../home.php");
+}
+?>
+

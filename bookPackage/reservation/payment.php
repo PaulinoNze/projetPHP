@@ -1,3 +1,8 @@
+<?php
+session_start();
+if(isset($_SESSION['userId']) && isset($_SESSION['firstname'])){
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -220,3 +225,8 @@
 </body>
 
 </html>
+<?php
+}else{
+  header("Location: ../home.php");
+}
+?>
